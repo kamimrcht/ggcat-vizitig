@@ -98,65 +98,11 @@ def parse_fasta_buffered(file_path, k, left_overlap_list, right_overlap_list, bu
     return left_overlap_list, right_overlap_list
 
 
-
-
-def insert_sorted(overlap_list, overlap):
-    """Insert overlaps in a sorted list.
-    Args:
-    - overlap_list (list): an overlap list
-    - overlap (string): a new overlap to be added
-    Returns:
-    - the updated overlap list
-    """
-    # Define initial search boundaries
-    left, right = 0, len(overlap_list) - 1
-    
-    while left <= right:
-        mid = (left + right) // 2
-        
-        # Adjust the search boundaries based on comparison with mid element
-        if overlap_list[mid] < overlap:
-            left = mid + 1
-        else:
-            right = mid - 1
-            
-    # At this point, left is the position where x should be inserted
-    overlap_list.insert(left, overlap)
-    return overlap_list
-
-
-def insert_overlaps(left_overlap_list, right_overlap_list, overlap, is_c, is_prefix):
-    """Insert overlaps (k-1 mers) in the right list to find connections.
-    Args:
-    - left_overlap_list (list): an overlap list
-    - right_overlap_list (list): an overlap list
-    - overlap (string): a k-1 mer in caonical form
-    - is_c (bool): whether the k-1 was canonical in the sequence or not
-    - is_prefix (bool): whether the k-1 mer comes from a prefix (true) or a suffix
-    Returns:
-    - the updated lists of overlap
-    """
-    if is_prefix: #is a prefix
-        if is_c: #prefix and canonical, in left list
-            left_overlap_list = insert_sorted(left_overlap_list, overlap)
-        else: #prefix and not canon, in right list
-            right_overlap_list = insert_sorted(right_overlap_list, overlap)
-    else: #is a suffix
-        if is_c: #suffix and canonical, goes to right list
-            right_overlap_list = insert_sorted(right_overlap_list, overlap)
-        else:
-            left_overlap_list = insert_sorted(left_overlap_list, overlap)
-    return left_overlap_list, right_overlap_list
     
 def find_connections2():
     for overlap in overlaps_to_info.keys():
-        print("OL", overlap)
-        if len(overlaps_to_info[overlap]) > 1: #node has connection(s)
             node1 = overlaps_to_info[overlap][0]
             for node2 in overlaps_to_info[overlap][1:]:
-                print("N1", node1)
-                print("N2", node2)
-
                 if node1[0] is True: #prefix
                     if node1[1] is True: #canonical prefix
                         if (node2[0] is True) and (node2[1] is False): #reverse prefix: possible link
