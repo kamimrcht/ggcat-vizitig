@@ -1,3 +1,11 @@
+# This is a forked GGCAT meant to build colored, bcalm-like dbg to obtain inputs for vizitig
+
+
+
+
+
+
+
 # GGCAT - compacted and colored de Bruijn graph construction and querying
 
 GGCAT is a tool for building compacted (and optionally colored) de Bruijn graphs from raw sequencing data or for merging multiple existing cDBG in a single graph. It also supports sequence queryies to either a colored or non-colored graph (i.e. number/percentage of present kmers).
