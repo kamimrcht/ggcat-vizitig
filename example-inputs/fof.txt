@@ -1,0 +1,3 @@
+example-inputs/sal1.fa
+example-inputs/sal2.fa
+example-inputs/sal3.fa
