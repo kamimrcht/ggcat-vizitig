@@ -1,7 +1,24 @@
 # This is a forked GGCAT meant to build colored, bcalm-like dbg to obtain inputs for vizitig
+## rust conf
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup toolchain install nightly
+
+## clone repo
+git clone --recursive https://github.com/kamimrcht/ggcat-vizitig.git
+
+## create rust exec and build colored graph
+cd ggcat-vizitig/crates/api/example
+cargo install --path .
+cd ../../..
+example example-inputs/fof.txt 31 output_ggcat_graph.fa
+### 31: k value, fof.txt: input files for graph, output_ggcat_graph.fa: output file
+
+## build final graph in BCALM2 format (in final_graph.fa)
+python3 ggcat_to_bcalm2.py -f output_ggcat_graph.fa -k 31 -o final_graph.fa
+### -f: input file, -k: k value, -o: output file
 
 
-
+# the following is GGCAT's original README
 
 
 
