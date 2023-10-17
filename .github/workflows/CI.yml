@@ -106,6 +106,10 @@ jobs:
       - name: Generate provenance subjects sanity check
         id: hash-sanity
         run: echo "$(sha256sum release/**/* | base64 -w0)"
+      - name: Download artifacts from build
+        uses: actions/download-artifact@v3.0.2
+        with:
+          path: release/
       - name: Create GitHub Release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
         with:
